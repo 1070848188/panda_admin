@@ -1,4 +1,4 @@
-import { getToken } from '@/utils/auth';
+import { getToken, setToken } from '@/utils/auth';
 
 const state = {
   token: getToken()
@@ -7,19 +7,24 @@ const state = {
 const mutations = {
     SET_TOKEN: function (state, token) {
         state.token = token
+        setToken(token)
     }
 }
 
 const actions = {
     login: function ({commit}, userInfo) {
-        console.log(userInfo);
-        commit('SET_TOKEN')
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                commit('SET_TOKEN', userInfo)
+                resolve()
+            }, 1000);
+        })
     }
 }
 
 
 export default {
-    namespace: true,
+    namespaced: true,
     state,
     mutations,
     actions

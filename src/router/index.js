@@ -16,6 +16,11 @@ const routes = [
     name: 'login',
     component: LoginView
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () => import('@/views/error-page/404')
+  },
 ]
 
 const router = new VueRouter({
